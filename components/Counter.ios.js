@@ -18,7 +18,7 @@ class Count extends Component {
   render() {
     var { count } = this.props;
     return (
-      <View style={styles.container}>
+      <View>
         <Text style={styles.count}>
           {count} {this.props.type + (count == 1 ? '' : 's')}
         </Text>
@@ -56,19 +56,33 @@ Count.PropTypes = {
 class Counter extends Component {
   render() {
     return (
-      <Count
-        type='duck'
-        count={this.props.ducks}
-        increment={this.props.incrementDucks}
-        decrement={this.props.decrementDucks} />
+      <View style={styles.container}>
+        <Count
+          type='duck'
+          count={this.props.ducks}
+          increment={this.props.duckActions.incrementDucks}
+          decrement={this.props.duckActions.decrementDucks} />
+        <Count
+          type='turtle'
+          count={this.props.turtles}
+          increment={this.props.turtleActions.incrementTurtles}
+          decrement={this.props.turtleActions.decrementTurtles} />
+      </View>
     );
   }
 };
 
 Counter.PropTypes = {
   ducks: PropTypes.number.isRequired,
-  incrementDucks: PropTypes.func.isRequired,
-  decrementDucks: PropTypes.func.isRequired,
+  duckActions: PropTypes.shape({
+    incrementDucks: PropTypes.func.isRequired,
+    decrementDucks: PropTypes.func.isRequired,
+  }),
+  turtles: PropTypes.number.isRequired,
+  turtleActions: PropTypes.shape({
+    incrementTurtles: PropTypes.func.isRequired,
+    decrementTurtles: PropTypes.func.isRequired,
+  }),
 };
 
 var styles = StyleSheet.create({
