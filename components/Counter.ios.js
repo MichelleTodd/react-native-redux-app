@@ -14,6 +14,26 @@ var {
   View,
 } = React;
 
+class Button extends Component {
+  render() {
+    return (
+      <TouchableHighlight
+          onPress={this.props.onPress}
+          underlayColor='rgba(0, 0, 0, 0.1)'
+          style={styles.button}>
+        <Text style={styles.buttonText}>
+          {this.props.children}
+        </Text>
+      </TouchableHighlight>
+    );
+  }
+}
+
+Button.PropTypes = {
+  text: PropTypes.string.isRequired,
+  onPress: PropTypes.func.isRequired,
+};
+
 class Count extends Component {
   render() {
     var { count } = this.props;
@@ -22,24 +42,12 @@ class Count extends Component {
         <Text style={styles.count}>
           {count} {this.props.type + (count == 1 ? '' : 's')}
         </Text>
-        <TouchableHighlight
-            onPress={this.props.increment}
-            underlayColor='rgba(0, 0, 0, 0.1)'>
-          <View style={styles.button}>
-            <Text style={styles.buttonText}>
-              Increment {this.props.type} count
-            </Text>
-          </View>
-        </TouchableHighlight>
-        <TouchableHighlight
-            onPress={this.props.decrement}
-            underlayColor='rgba(0, 0, 0, 0.1)'>
-          <View style={styles.button}>
-            <Text style={styles.buttonText}>
-              Decrement {this.props.type} count
-            </Text>
-          </View>
-        </TouchableHighlight>
+        <Button onPress={this.props.increment}>
+          Increment {this.props.type} count
+        </Button>
+        <Button onPress={this.props.decrement}>
+          Decrement {this.props.type} count
+        </Button>
       </View>
     );
   }
