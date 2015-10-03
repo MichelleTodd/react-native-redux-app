@@ -2,17 +2,17 @@
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux/native';
-import MyComponent from '../components/MyComponent.ios';
-import * as ComponentActions from '../actions/component';
+import Counter from '../components/Counter.ios';
+import * as CounterActions from '../actions/counter';
 
 function mapStateToProps(state) {
   return {
-    component: state.component
+    counter: state.counter
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(ComponentActions, dispatch);
+  return bindActionCreators(CounterActions, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);
