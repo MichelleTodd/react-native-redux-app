@@ -19,23 +19,23 @@ class Counter extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.count}>
-          {this.props.counter}
+          {this.props.ducks}
         </Text>
         <TouchableHighlight
-            onPress={this.props.increment}
+            onPress={this.props.incrementDucks}
             underlayColor='rgba(0, 0, 0, 0.1)'>
           <View style={styles.button}>
             <Text style={styles.buttonText}>
-              Increment count
+              Increment duck count
             </Text>
           </View>
         </TouchableHighlight>
         <TouchableHighlight
-            onPress={this.props.decrement}
+            onPress={this.props.decrementDucks}
             underlayColor='rgba(0, 0, 0, 0.1)'>
           <View style={styles.button}>
             <Text style={styles.buttonText}>
-              Decrement count
+              Decrement duck count
             </Text>
           </View>
         </TouchableHighlight>
@@ -45,9 +45,9 @@ class Counter extends Component {
 };
 
 Counter.PropTypes = {
-  counter: PropTypes.number.isRequired,
-  increment: PropTypes.func.isRequired,
-  decrement: PropTypes.func.isRequired,
+  ducks: PropTypes.number.isRequired,
+  incrementDucks: PropTypes.func.isRequired,
+  decrementDucks: PropTypes.func.isRequired,
 };
 
 var styles = StyleSheet.create({
