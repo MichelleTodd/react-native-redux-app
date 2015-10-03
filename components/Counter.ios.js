@@ -14,32 +14,53 @@ var {
   View,
 } = React;
 
-class Counter extends Component {
+class Count extends Component {
   render() {
+    var { count } = this.props;
     return (
       <View style={styles.container}>
         <Text style={styles.count}>
-          {this.props.ducks}
+          {count} {this.props.type + (count == 1 ? '' : 's')}
         </Text>
         <TouchableHighlight
-            onPress={this.props.incrementDucks}
+            onPress={this.props.increment}
             underlayColor='rgba(0, 0, 0, 0.1)'>
           <View style={styles.button}>
             <Text style={styles.buttonText}>
-              Increment duck count
+              Increment {this.props.type} count
             </Text>
           </View>
         </TouchableHighlight>
         <TouchableHighlight
-            onPress={this.props.decrementDucks}
+            onPress={this.props.decrement}
             underlayColor='rgba(0, 0, 0, 0.1)'>
           <View style={styles.button}>
             <Text style={styles.buttonText}>
-              Decrement duck count
+              Decrement {this.props.type} count
             </Text>
           </View>
         </TouchableHighlight>
       </View>
+    );
+  }
+}
+
+Count.PropTypes = {
+  count: PropTypes.number.isRequired,
+  type: PropTypes.string.isRequired,
+  increment: PropTypes.func.isRequired,
+  decrement: PropTypes.func.isRequired,
+};
+
+
+class Counter extends Component {
+  render() {
+    return (
+      <Count
+        type='duck'
+        count={this.props.ducks}
+        increment={this.props.incrementDucks}
+        decrement={this.props.decrementDucks} />
     );
   }
 };
