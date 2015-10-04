@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux';
-import ducks from './ducks';
-import turtles from './turtles';
+import counter from './counter';
 
 const rootReducer = combineReducers({
-  ducks,
-  turtles,
+  counter
 });
 
 export default rootReducer;

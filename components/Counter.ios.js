@@ -36,17 +36,17 @@ Button.PropTypes = {
 
 class Count extends Component {
   render() {
-    var { count } = this.props;
+    var { count, names, increment, decrement } = this.props;
     return (
       <View>
         <Text style={styles.count}>
-          {count} {this.props.type + (count == 1 ? '' : 's')}
+          {count} {count == 1 ? names.singular : names.plural}
         </Text>
-        <Button onPress={this.props.increment}>
-          Increment {this.props.type} count
+        <Button onPress={increment}>
+          +
         </Button>
-        <Button onPress={this.props.decrement}>
-          Decrement {this.props.type} count
+        <Button onPress={decrement}>
+          -
         </Button>
       </View>
     );
@@ -63,33 +63,35 @@ Count.PropTypes = {
 
 class Counter extends Component {
   render() {
+    const { dispatch, animals } = this.props;
+    const { increment, decrement } = this.props.counterActions;
+
+    var animalCounts = [];
+    for (let animal in animals) {
+      const animalData = animals[animal];
+      animalCounts.push(
+        <Count
+            key={animal}
+            names={animals[animal].name}
+            count={animals[animal].count}
+            increment={() => {increment(animal)}}
+            decrement={() => {decrement(animal)}} />
+      );
+    }
+
     return (
       <View style={styles.container}>
-        <Count
-          type='duck'
-          count={this.props.ducks}
-          increment={this.props.duckActions.incrementDucks}
-          decrement={this.props.duckActions.decrementDucks} />
-        <Count
-          type='turtle'
-          count={this.props.turtles}
-          increment={this.props.turtleActions.incrementTurtles}
-          decrement={this.props.turtleActions.decrementTurtles} />
+      {animalCounts}
       </View>
     );
   }
 };
 
 Counter.PropTypes = {
-  ducks: PropTypes.number.isRequired,
-  duckActions: PropTypes.shape({
-    incrementDucks: PropTypes.func.isRequired,
-    decrementDucks: PropTypes.func.isRequired,
-  }),
-  turtles: PropTypes.number.isRequired,
-  turtleActions: PropTypes.shape({
-    incrementTurtles: PropTypes.func.isRequired,
-    decrementTurtles: PropTypes.func.isRequired,
+  animals: PropTypes.object.isRequired,
+  counterActions: PropTypes.shape({
+    increment: PropTypes.func.isRequired,
+    decrement: PropTypes.func.isRequired,
   }),
 };
 

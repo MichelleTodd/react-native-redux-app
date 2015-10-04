@@ -3,20 +3,17 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux/native';
 import Counter from '../components/Counter.ios';
-import * as DuckCounterActions from '../actions/duck-counter';
-import * as TurtleCounterActions from '../actions/turtle-counter';
+import * as CounterActions from '../actions/counter';
 
 function mapStateToProps(state) {
   return {
-    ducks: state.ducks,
-    turtles: state.turtles,
+    animals: state.counter.animals,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    duckActions: bindActionCreators(DuckCounterActions, dispatch),
-    turtleActions: bindActionCreators(TurtleCounterActions, dispatch),
+    counterActions: bindActionCreators(CounterActions, dispatch),
   };
 }
 
