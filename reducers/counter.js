@@ -2,24 +2,27 @@ import { INCREMENT, DECREMENT } from '../actions/counter.js';
 
 const initialState = {
     animals: {
-        duck: {
+        fish: {
+          emoji: "\ud83d\udc1f",
           name: {
-            singular: 'duck',
-            plural: 'ducks',
+            singular: 'fish',
+            plural: 'fish',
           },
           count: 0,
         },
         turtle: {
+          emoji: "\ud83d\udc22",
           name: {
             singular: 'turtle',
             plural: 'turtles',
           },
           count: 0,
         },
-        potato: {
+        flower: {
+          emoji: "\ud83c\udf3a",
           name: {
-            singular: 'potato',
-            plural: 'potatoes',
+            singular: 'flower',
+            plural: 'flowers',
           },
           count: 0,
         },

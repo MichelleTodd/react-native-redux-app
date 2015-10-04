@@ -65,10 +65,18 @@ class Counter extends Component {
     const { dispatch, animals } = this.props;
     const { increment, decrement } = this.props.counterActions;
 
-    var animalCounts = [];
+    var animalEmoji = [];
+    var animalCounters = [];
     for (let animal in animals) {
       const animalData = animals[animal];
-      animalCounts.push(
+      for (let i = 0; i < animals[animal].count; i++) {
+        animalEmoji.push(
+          <Text key={animal + i} style={styles.emoji}>
+            {animals[animal].emoji}
+          </Text>
+        );
+      }
+      animalCounters.push(
         <AnimalCount
             key={animal}
             names={animals[animal].name}
@@ -80,7 +88,12 @@ class Counter extends Component {
 
     return (
       <View style={styles.container}>
-      {animalCounts}
+      <View style={styles.emojiContainer}>
+        {animalEmoji}
+      </View>
+      <View style={styles.counters}>
+        {animalCounters}
+      </View>
       </View>
     );
   }
@@ -96,19 +109,32 @@ Counter.PropTypes = {
 
 var styles = StyleSheet.create({
   container: {
+    backgroundColor: '#F5FCFF',
+    flex: 1,
+  },
+  emojiContainer: {
+    alignItems: 'flex-start',
+    backgroundColor: 'rgba(0, 0, 0, 0.05)',
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginTop: 50,
+  },
+  emoji: {
+    fontSize: 32,
+  },
+  counters: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'flex-end',
-    backgroundColor: '#F5FCFF',
   },
   animalCount: {
+    alignItems: 'stretch',
     backgroundColor: 'rgba(0, 0, 0, 0.05)',
     borderColor: 'rgba(0, 0, 0, 0.1)',
     borderTopWidth: 1,
     flex: 1,
-    alignItems: 'stretch',
     flexDirection: 'column',
-    alignItems: 'center',
   },
   count: {
     fontSize: 32,
@@ -122,7 +148,6 @@ var styles = StyleSheet.create({
     textAlign: 'center',
   },
   button: {
-    alignSelf: 'stretch',
     backgroundColor: 'rgba(0, 0, 0, 0.1)',
     borderWidth: 1,
     borderColor: 'rgba(0, 0, 0, 0.2)',
